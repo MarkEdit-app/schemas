@@ -1,0 +1,153 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/MarkEdit-app/schemas/raw/refs/heads/main/settings.json",
+  "title": "MarkEdit Advanced Settings",
+  "description": "Schema for ~/Library/Containers/app.cyan.markedit/Data/Documents/settings.json. Generated from AppRuntimeConfig.swift (Definition).",
+  "type": "object",
+  "additionalProperties": false,
+  "patternProperties": {
+    "^extension\\.": {
+      "description": "Settings for a MarkEdit extension. Shape is defined by the extension itself."
+    }
+  },
+  "definitions": {
+    "hotKey": {
+      "type": "object",
+      "description": "Keyboard shortcut. Letter case matters.",
+      "additionalProperties": false,
+      "required": ["key", "modifiers"],
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Printable characters use uppercase form (e.g. \"M\", \"=\"). Non-printable use names like \"Tab\", \"Return\", \"F1\"."
+        },
+        "modifiers": {
+          "type": "array",
+          "description": "Modifier keys; order does not matter.",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": ["Shift", "Control", "Command", "Option"]
+          }
+        }
+      }
+    },
+    "customToolbarItem": {
+      "type": "object",
+      "description": "Custom toolbar item. Provide menuName and/or actionName.",
+      "additionalProperties": false,
+      "required": ["title", "icon"],
+      "properties": {
+        "title": { "type": "string" },
+        "icon": { "type": "string", "description": "Valid SF Symbol name." },
+        "actionName": { "type": ["string", "null"] },
+        "menuName": { "type": ["string", "null"] }
+      }
+    }
+  },
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference for editor tooling."
+    },
+    "editor.autoCharacterPairs": {
+      "type": ["boolean", "null"],
+      "description": "Whether to automatically wrap selections with characters like [], **, etc. Default: true."
+    },
+    "editor.autoSaveWhenIdle": {
+      "type": ["boolean", "null"],
+      "description": "Save changes automatically after stopping typing for a while. Forced off when editor.closeAlwaysConfirmsChanges is true. Default: false."
+    },
+    "editor.closeAlwaysConfirmsChanges": {
+      "type": ["boolean", "null"],
+      "description": "MarkEdit-only equivalent of \"Ask to keep changes when closing documents\"."
+    },
+    "editor.restoreLastSelection": {
+      "type": ["boolean", "null"],
+      "description": "Restore the selection range from the previous edit session. Default: true."
+    },
+    "editor.indentBehavior": {
+      "type": ["string", "null"],
+      "description": "Whether to indent paragraphs or lines. Default: never.",
+      "enum": ["never", "paragraph", "line", null]
+    },
+    "editor.writingToolsBehavior": {
+      "type": ["string", "null"],
+      "description": "macOS Sequoia+ Writing Tools behavior. Unknown values are ignored.",
+      "enum": ["none", "complete", "limited", null]
+    },
+    "editor.headerFontSizeDiffs": {
+      "type": ["array", "null"],
+      "description": "Font-size deltas for headings 1-6.",
+      "items": { "type": "number" }
+    },
+    "editor.visibleWhitespaceCharacter": {
+      "type": ["string", "null"],
+      "description": "Character used to render whitespace when Render Invisibles is enabled. Empty string hides them."
+    },
+    "editor.visibleLineBreakCharacter": {
+      "type": ["string", "null"],
+      "description": "Character used to render line breaks when Render Invisibles is enabled. Empty string hides them."
+    },
+    "editor.searchNormalizers": {
+      "type": ["object", "null"],
+      "description": "Map of regex pattern -> replacement string applied to search queries.",
+      "additionalProperties": { "type": "string" }
+    },
+    "editor.nativeSearchQuerySync": {
+      "type": ["boolean", "null"],
+      "description": "Sync the search query from native apps (e.g. TextEdit). Default: false."
+    },
+    "editor.customToolbarItems": {
+      "type": ["array", "null"],
+      "description": "Custom toolbar items.",
+      "items": { "$ref": "#/definitions/customToolbarItem" }
+    },
+    "general.useClassicInterface": {
+      "type": ["boolean", "null"],
+      "description": "macOS Tahoe: revert to classic aesthetics instead of Liquid Glass. Default: false."
+    },
+    "general.visualEffectType": {
+      "type": ["string", "null"],
+      "description": "macOS Tahoe: visual effect for some UI components. Default: glass.",
+      "enum": ["glass", "blur", null]
+    },
+    "general.updateBehavior": {
+      "type": ["string", "null"],
+      "description": "Behavior for presenting new app versions. Default: quiet.",
+      "enum": ["quiet", "notify", "never", null]
+    },
+    "general.checksForUpdates": {
+      "type": ["boolean", "null"],
+      "description": "Deprecated. Use general.updateBehavior instead. When false, forces updateBehavior to never.",
+      "deprecated": true
+    },
+    "general.defaultOpenDirectory": {
+      "type": ["string", "null"],
+      "description": "Default directory for opening files (e.g. \"~/Downloads\")."
+    },
+    "general.defaultSaveDirectory": {
+      "type": ["string", "null"],
+      "description": "Default directory for saving files (e.g. \"~/Desktop\")."
+    },
+    "general.disableOpenPanelOptions": {
+      "type": ["boolean", "null"],
+      "description": "Disable options in the file open panel. Default: true on macOS 26+, otherwise false."
+    },
+    "general.disableCorsRestrictions": {
+      "type": ["boolean", "null"],
+      "description": "Disable CORS restrictions for the Fetch API. Default: false."
+    },
+    "general.preferredTerminalApp": {
+      "type": ["string", "null"],
+      "description": "Bundle identifier of the preferred terminal app for Pandoc (e.g. \"com.apple.Terminal\")."
+    },
+    "general.mainWindowHotKey": {
+      "description": "Global hotkey to toggle main window visibility.",
+      "oneOf": [
+        { "$ref": "#/definitions/hotKey" },
+        { "type": "null" }
+      ]
+    }
+  }
+}
