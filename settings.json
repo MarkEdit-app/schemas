@@ -138,6 +138,12 @@
       "type": ["boolean", "null"],
       "description": "Disable CORS restrictions for the Fetch API. Default: false."
     },
+    "general.disabledWebKitFeatures": {
+      "type": ["array", "null"],
+      "description": "Additional WKPreferences feature keys to disable at WebContent process startup, on top of the always-disabled built-in set. Example: [\"NotificationsEnabled\", \"PushAPIEnabled\"]. Default: [].",
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
     "general.preferredTerminalApp": {
       "type": ["string", "null"],
       "description": "Bundle identifier of the preferred terminal app for Pandoc (e.g. \"com.apple.Terminal\")."
