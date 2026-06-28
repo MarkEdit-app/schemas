@@ -99,9 +99,12 @@
       "description": "Sync the search query from native apps (e.g. TextEdit). Default: false."
     },
     "editor.toolbarTranslucency": {
-      "type": ["string", "null"],
-      "description": "Translucency of the tinted toolbar overlay; heavier means more transparent. Default: regular.",
-      "enum": ["light", "regular", "heavy", null]
+      "description": "Translucency of the tinted toolbar overlay, from readable (most solid) to vibrant (most translucent). Or a custom \"blur, tinted, plain\" string, e.g. \"8, 0.7, 0.4\". Defaults to \"default\".",
+      "anyOf": [
+        { "enum": ["readable", "default", "vibrant"] },
+        { "type": "string" },
+        { "type": "null" }
+      ]
     },
     "editor.customToolbarItems": {
       "type": ["array", "null"],
