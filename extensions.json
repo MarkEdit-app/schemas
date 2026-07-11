@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/MarkEdit-app/schemas/main/extensions.json",
+  "title": "MarkEdit Extensions",
+  "description": "Schema for ~/Library/Containers/app.cyan.markedit/Data/Documents/extensions.json. Tracks the extension registry source and the installed extensions.",
+  "type": "object",
+  "additionalProperties": false,
+  "definitions": {
+    "installedExtension": {
+      "type": "object",
+      "description": "An installed extension. Array position is the injection order.",
+      "additionalProperties": false,
+      "required": ["id", "file"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Extension identifier; kebab-case. Matches the registry entry when installed from the registry. An id that does not resolve in the registry index marks an unofficial (URL-lane) install.",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "version": {
+          "type": ["string", "null"],
+          "description": "Installed semantic version, e.g. \"1.2.0\". May be absent for URL-lane or manual installs."
+        },
+        "url": {
+          "type": ["string", "null"],
+          "description": "Source the file was downloaded from. Absent for files dropped into scripts/ manually.",
+          "format": "uri"
+        },
+        "sha256": {
+          "type": ["string", "null"],
+          "description": "Integrity hash of the downloaded file, pinned at install time.",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "file": {
+          "type": "string",
+          "description": "Filename under scripts/, e.g. \"markedit-preview.js\".",
+          "pattern": "\\.js$"
+        },
+        "enabled": {
+          "type": ["boolean", "null"],
+          "description": "Whether the extension is injected. Disabling skips injection without deleting the file. Default: true."
+        },
+        "updateCheck": {
+          "type": ["string", "null"],
+          "description": "Per-extension override of registry.updateCheck. Set \"never\" to freeze this extension. Default: inherit registry.updateCheck.",
+          "enum": ["never", "onLaunch", "daily", "weekly", null]
+        },
+        "installDate": {
+          "type": ["string", "null"],
+          "description": "When the extension was installed.",
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference for editor tooling."
+    },
+    "registry.url": {
+      "type": ["string", "null"],
+      "description": "URL of the registry index.json. Overridable; a CDN mirror can replace it. Default: https://raw.githubusercontent.com/MarkEdit-app/extensions/main/index.json.",
+      "format": "uri"
+    },
+    "registry.updateCheck": {
+      "type": ["string", "null"],
+      "description": "How often to check the registry for updates. Default: weekly.",
+      "enum": ["never", "onLaunch", "daily", "weekly", null]
+    },
+    "registry.updateStrategy": {
+      "type": ["string", "null"],
+      "description": "What to do when an update is available. Default: prompt.",
+      "enum": ["prompt", "automatic", "manual", null]
+    },
+    "installed": {
+      "type": ["array", "null"],
+      "description": "Installed extensions, in injection order.",
+      "items": { "$ref": "#/definitions/installedExtension" }
+    }
+  }
+}
