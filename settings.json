@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/MarkEdit-app/schemas/raw/refs/heads/main/settings.json",
+  "$id": "https://raw.githubusercontent.com/MarkEdit-app/schemas/main/settings.json",
   "title": "MarkEdit Advanced Settings",
   "description": "Schema for ~/Library/Containers/app.cyan.markedit/Data/Documents/settings.json. Generated from AppRuntimeConfig.swift (Definition).",
   "type": "object",
