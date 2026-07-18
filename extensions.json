@@ -40,11 +40,6 @@
           "type": ["boolean", "null"],
           "description": "Whether the extension is injected. Disabling skips injection without deleting the file. Default: true."
         },
-        "updateCheck": {
-          "type": ["string", "null"],
-          "description": "Per-extension override of registry.updateCheck. Set \"never\" to freeze this extension. Default: inherit registry.updateCheck.",
-          "enum": ["never", "onLaunch", "daily", "weekly", null]
-        },
         "installDate": {
           "type": ["string", "null"],
           "description": "When the extension was installed.",
@@ -63,15 +58,10 @@
       "description": "URL of the registry index.json. Overridable; a CDN mirror can replace it. Default: https://raw.githubusercontent.com/MarkEdit-app/extensions/main/index.json.",
       "format": "uri"
     },
-    "registry.updateCheck": {
+    "registry.updateBehavior": {
       "type": ["string", "null"],
-      "description": "How often to check the registry for updates. Default: weekly.",
-      "enum": ["never", "onLaunch", "daily", "weekly", null]
-    },
-    "registry.updateStrategy": {
-      "type": ["string", "null"],
-      "description": "What to do when an update is available. Default: prompt.",
-      "enum": ["prompt", "automatic", "manual", null]
+      "description": "How the app handles extension updates, mirroring the app's own update vocabulary. \"never\": don't check the registry in the background; \"quiet\": surface updates in the Extensions window only; \"notify\": ask before updating; \"automatic\": update automatically. The catalog is still revalidated hourly unless set to \"never\". Default: quiet.",
+      "enum": ["never", "quiet", "notify", "automatic", null]
     },
     "installed": {
       "type": ["array", "null"],
