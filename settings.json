@@ -76,6 +76,10 @@
       "description": "macOS Sequoia+ Writing Tools behavior. Unknown values are ignored.",
       "enum": ["none", "complete", "limited", null]
     },
+    "editor.undoGroupingInterval": {
+      "type": ["number", "null"],
+      "description": "Maximum time in milliseconds between edits for them to be grouped into a single undo step. Default: 300."
+    },
     "editor.headerFontSizeDiffs": {
       "type": ["array", "null"],
       "description": "Font-size deltas for headings 1-6.",
