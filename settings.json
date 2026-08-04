@@ -117,8 +117,8 @@
     },
     "general.updateBehavior": {
       "type": ["string", "null"],
-      "description": "Behavior for presenting new app versions. Default: quiet.",
-      "enum": ["quiet", "notify", "never", null]
+      "description": "Behavior for presenting new app versions, automatic installs on next launch. Default: quiet.",
+      "enum": ["never", "quiet", "notify", "automatic", null]
     },
     "general.checksForUpdates": {
       "type": ["boolean", "null"],
