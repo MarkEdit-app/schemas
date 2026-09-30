@@ -133,6 +133,10 @@
       "type": ["string", "null"],
       "description": "Default directory for saving files (e.g. \"~/Desktop\")."
     },
+    "general.disableDebugFiles": {
+      "type": ["boolean", "null"],
+      "description": "Delete the debug folder on launch and stop writing local recovery and diagnostic files. Requires restart. Default: false."
+    },
     "general.disableOpenPanelOptions": {
       "type": ["boolean", "null"],
       "description": "Disable options in the file open panel. Default: true on macOS 26+, otherwise false."
