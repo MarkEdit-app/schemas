@@ -117,7 +117,7 @@
     },
     "general.updateBehavior": {
       "type": ["string", "null"],
-      "description": "Behavior for presenting new app versions, automatic installs on next launch. Default: quiet.",
+      "description": "Behavior for presenting new app versions. Automatic downloads silently and installs on quit. Default: quiet.",
       "enum": ["never", "quiet", "notify", "automatic", null]
     },
     "general.checksForUpdates": {
@@ -139,11 +139,11 @@
     },
     "general.disableOpenPanelOptions": {
       "type": ["boolean", "null"],
-      "description": "Disable options in the file open panel. Default: true on macOS 26+, otherwise false."
+      "description": "Disable options in the file open panel. Default: true."
     },
     "general.disableCorsRestrictions": {
       "type": ["boolean", "null"],
-      "description": "Disable CORS restrictions for the Fetch API. Default: false."
+      "description": "Disable CORS restrictions for the Fetch API. Default: true."
     },
     "general.disabledWebKitFeatures": {
       "type": ["array", "null"],
